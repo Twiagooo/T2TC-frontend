@@ -1,0 +1,37 @@
+<div style="padding: 20px; font-family: sans-serif;">
+  <h2>Lista de Alumnos</h2>
+  <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left;">
+    <thead style="background-color: #f2f2f2;">
+      <tr>
+        <th>ID</th>
+        <th>Nombres</th>
+        <th>Carrera</th>
+        <th>Ciclo</th>
+        <th>Promedio</th>
+        <th>Estado Académico</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (alumno of alumnos; track alumno.id) {
+        <tr>
+          <td>{{ alumno.id }}</td>
+          <td>{{ alumno.nombres }}</td>
+          <td>{{ alumno.carrera }}</td>
+          <td>{{ alumno.ciclo }}</td>
+          <td>{{ alumno.promedio }}</td>
+          <td [ngStyle]="{'color': alumno.estadoAcademico === 'EN RIESGO' ? 'red' : 'green'}">
+            <b>{{ alumno.estadoAcademico }}</b>
+          </td>
+          <td>
+            <button (click)="eliminar(alumno.id)" style="cursor: pointer;">Eliminar</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7" style="text-align: center;">No hay alumnos para mostrar. ¿Seguro que inyectaste datos en Postman?</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
